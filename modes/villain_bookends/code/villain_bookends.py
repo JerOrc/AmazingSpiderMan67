@@ -1246,6 +1246,12 @@ class VillainBookends(Mode):
             self.warning_log("Unknown villain intro requested: %s", villain)
             return
 
+        if self._is_wizard(villain):
+            # Clear guidance and its pending reminders before the intro, so the
+            # new wizard can publish its own status without stale callbacks.
+            self.machine.events.post("clear_mode_display_context", force=True)
+            self.machine.events.post("wizard_start_guidance_clear")
+
         self.machine.events.post("play_song_14" if self._is_wizard(villain) else "play_villain_intro_music")
         self.machine.game.player["villain_mode_in_summary"] = False
 

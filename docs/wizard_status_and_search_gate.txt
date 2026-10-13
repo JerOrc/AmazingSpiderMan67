@@ -1,0 +1,17 @@
+Based on ASM67_2026_10_13_1am.zip. Replace all four included source/config
+files preserving directories and restart MPF.
+
+Wizard intro requests now force-clear shared mode message/status context:
+message and status text, countdown, delayed reminder, and shared widgets.
+Daily Bugle ready and chapter-status widgets are also removed. Applies through
+the common bookend intro path to chapter wizards, final wizard, and test launches.
+Cleanup precedes intro/gameplay; new wizard status can display normally.
+Ordinary final-award preservation remains unchanged unless force=True.
+
+Active ball-search stages now request gate positions through existing events:
+1 open; 2 close; 3 open. Reasserted on each phase iteration. Existing search
+blocking and bounded attract search remain intact. No gate action if blocked
+search stops during the phase callback. No new raw coil actions.
+
+Validation: Python compilation, YAML parsing, isolated cleanup and gate-order
+checks passed. Full runtime and machine testing remain unconfirmed.

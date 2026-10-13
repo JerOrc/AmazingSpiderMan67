@@ -509,7 +509,7 @@ class Base(Mode):
         self._ball_end_display_lock = False
         self._clear_mode_display_context(**kwargs)
 
-    def _clear_mode_display_context(self, **kwargs):
+    def _clear_mode_display_context(self, force=False, **kwargs):
         """Cancel stale temporary display work when a gameplay mode stops.
 
         Reminder/countdown callbacks live in base mode, not in the villain mode
@@ -519,7 +519,8 @@ class Base(Mode):
         shared message/status widgets.
         """
         preserve_terminal_award = (
-            not getattr(self, "_ball_end_display_lock", False)
+            not force
+            and not getattr(self, "_ball_end_display_lock", False)
             and time.monotonic() < getattr(self, "_terminal_award_message_deadline", 0.0)
         )
         self._bump_display_generation()

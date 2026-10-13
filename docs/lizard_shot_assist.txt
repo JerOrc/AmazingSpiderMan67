@@ -1,0 +1,12 @@
+Lizard Shot Assist change
+
+Replace modes/lizard/code/lizard.py and restart MPF.
+Based on October 9 9AM checkpoint.
+
+Normal delivery: left web.
+With Shot Assist: left web, main spinner, or center web.
+Left B retains its normal A/B behavior and no longer collects delivery.
+Helper and delivery prompts updated. Upper spinner remains excluded.
+
+Python syntax and exact delivery-handler mapping checked; existing Shot
+Assist gate retained. On-machine testing remains unconfirmed.

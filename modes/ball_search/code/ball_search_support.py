@@ -72,9 +72,11 @@ class BallSearchSupport(Mode):
             self.search.unblock()
 
     def _stage_changed(self, phase, iteration=1, **kwargs):
-        """One listener for every phase/iteration, ready for future actions."""
+        """Set the rooftop gate position for each active search phase."""
         self._sync_block()
         if self.search.started:
+            gate_event = "rooftop_diverter_close" if phase == 2 else "rooftop_diverter_open"
+            self.machine.events.post(gate_event)
             self.info_log("Ball search stage %s, iteration %s", phase, iteration)
 
     def _can_search(self):

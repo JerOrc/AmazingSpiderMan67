@@ -30,7 +30,7 @@ coils:
 
   c_flipper_left_lower_full:
     number: 1616bot-15
-    default_pulse_ms: 24
+    default_pulse_ms: 22
   c_flipper_left_lower_hold:
     number: 1616bot-14
     default_hold_power: 1.0
@@ -50,7 +50,7 @@ coils:
 
   c_flipper_right_lower_full:
     number: 1616bot-11
-    default_pulse_ms: 24
+    default_pulse_ms: 22
   c_flipper_right_lower_hold:
     number: 1616bot-10
     default_hold_power: 1.0
