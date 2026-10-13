@@ -8,10 +8,9 @@
 mode:
   start_events: start_mode_fakir
   stop_events:
+    - stop_mode_fakir
     - ball_will_end
     - bonus_start
-    - fakir_mode_complete
-    - fakir_mode_completed_summary
     - ball_ended
   code: fakir.Fakir
   priority: 500

@@ -8,10 +8,9 @@
 mode:
   start_events: start_mode_doctor_cool
   stop_events:
+    - stop_mode_doctor_cool
     - ball_will_end
     - bonus_start
-    - doctor_cool_mode_complete
-    - doctor_cool_mode_completed_summary
     - ball_ended
   code: doctor_cool.DoctorCool
   priority: 300

@@ -62,7 +62,7 @@ class SpiderSlayer(CaseFileMixin, Mode):
         self.active_shots = set()
         self.shot_hits = {shot: 0 for shot in self.SHOTS}
         self.hits = 0
-        self.mode_points = self.villain_start_bonus
+        self.mode_points = 0
         self.hunt_started_at = None
         self.hunt_completed = False
         self.hunt_time_tenths = 0
@@ -226,7 +226,7 @@ class SpiderSlayer(CaseFileMixin, Mode):
         self.machine.events.post("show_mode_jackpot", message_mode_title="SPIDER-SLAYER DESTROYED", message_mode_subtitle="SLAYER JACKPOT", message_mode_value=self.collected_jackpot)
         self.machine.events.post("play_mode_jackpot")
         self.machine.events.post("villain_summary_hold_vuk_until_done")
-        self.delay.add(name="spider_slayer_finish", ms=2000, callback=self.machine.events.post, event="spider_slayer_mode_complete")
+        self.machine.events.post("spider_slayer_mode_complete")
 
     def _ball_ending(self, **kwargs):
         if self.mode_done:

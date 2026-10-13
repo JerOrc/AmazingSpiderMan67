@@ -94,7 +94,7 @@ class CliveBlotto(CaseFileMixin, Mode):
         self.infected = set()
         self.cleared_count = 0
         self.attack_count = 0
-        self.mode_points = self.villain_start_bonus
+        self.mode_points = 0
         self.right_pop_pulse_active = False
         self.right_pop_pulse_on = False
         self.more_jackpots_collected = set()
@@ -129,7 +129,7 @@ class CliveBlotto(CaseFileMixin, Mode):
 
         player = self.machine.game.player
         player[f"{self.MODE_KEY}_state"] = 1
-        player["active_mode_points"] = self.villain_start_bonus
+        player["active_mode_points"] = 0
         player["active_mode_stat_1"] = 0
         player["active_mode_stat_2"] = 0
 
@@ -360,11 +360,8 @@ class CliveBlotto(CaseFileMixin, Mode):
             message_mode_subtitle="BLOTTO CONTAINED",
             message_mode_value=f"{self.completion_score:,}",
         )
-        self.delay.add(
-            name="clive_blotto_completion_hold",
-            ms=2_000,
-            callback=self._post_completion,
-        )
+        # The shared progression handler provides the two-second live-mode hold.
+        self._post_completion()
         return True
 
     def _post_completion(self, **kwargs):

@@ -596,7 +596,7 @@ class InvasionFromEverywhere(Mode):
         self.machine.events.post(f"{self.MODE_KEY}_mode_complete")
         self.machine.events.post("hide_mode_status")
         self.machine.events.post("cancel_mode_message_reminder")
-        self.machine.events.post(f"stop_mode_{self.MODE_KEY}")
+        # villain_progression stops the gameplay mode after the audio hold.
 
     def _balls_in_play(self):
         if not self.machine.game:

@@ -1087,6 +1087,12 @@ class VillainBookends(Mode):
         )
         self.add_mode_event_handler("villain_summary_hold_saucer_until_done", self._mark_terminal_award)
         self.add_mode_event_handler("villain_summary_delay_for_final_award", self._mark_terminal_award)
+        # Shared jackpot audio protection for every villain: if a jackpot
+        # immediately completes a mode, defer the summary/music transition
+        # until the two-second award window has elapsed. Ordinary jackpots
+        # do not delay ongoing gameplay.
+        self.add_mode_event_handler("play_mode_jackpot", self._mark_jackpot_audio_window)
+        self.add_mode_event_handler("play_mode_super_jackpot", self._mark_jackpot_audio_window)
         self.add_mode_event_handler("show_mode_message", self._record_gameplay_message)
         self.add_mode_event_handler("show_mode_message_long", self._record_gameplay_message)
         self.add_mode_event_handler("show_mode_jackpot", self._record_gameplay_message)
@@ -1179,6 +1185,20 @@ class VillainBookends(Mode):
         """
         self.terminal_award_summary_deadline = time.monotonic() + 2.0
 
+    def _mark_jackpot_audio_window(self, **kwargs):
+        """Protect the final jackpot from an immediate summary music change.
+
+        The deadline is only consulted if a summary is requested while this
+        window is active; normal mid-mode jackpots continue without delay.
+        """
+        player = self.machine.game.player if self.machine.game else None
+        if not player or not player["villain_mode_running"] or player["villain_mode_in_summary"]:
+            return
+        self.terminal_award_summary_deadline = max(
+            self.terminal_award_summary_deadline,
+            time.monotonic() + 2.0,
+        )
+
     def _hold_vuk_until_summary_done(self, **kwargs):
         """Hold a mode-ending VUK ball until the villain summary finishes.
 
@@ -1245,12 +1265,6 @@ class VillainBookends(Mode):
         if villain not in self.VILLAINS:
             self.warning_log("Unknown villain intro requested: %s", villain)
             return
-
-        if self._is_wizard(villain):
-            # Clear guidance and its pending reminders before the intro, so the
-            # new wizard can publish its own status without stale callbacks.
-            self.machine.events.post("clear_mode_display_context", force=True)
-            self.machine.events.post("wizard_start_guidance_clear")
 
         self.machine.events.post("play_song_14" if self._is_wizard(villain) else "play_villain_intro_music")
         self.machine.game.player["villain_mode_in_summary"] = False

@@ -122,6 +122,7 @@ class FinalShowdown(Mode):
 
         self._runtime_state = {}
         self.mode_exiting = False
+        self.mode_done = False
         self.current_phase = None
         self.completed_phases = set()
         self.next_phase = None
@@ -1424,6 +1425,7 @@ class FinalShowdown(Mode):
         # any remaining multiball balls can drain naturally, and only release
         # the VUK / start the summary after the hold has finished.
         self.mode_exiting = True
+        self.mode_done = True
         final_value = self.kingpin_bank
         self._score(final_value)
 
@@ -1460,11 +1462,13 @@ class FinalShowdown(Mode):
         self.machine.events.post("final_showdown_victory_hold_finished", value=int(final_value))
         self.machine.events.post("request_vuk_eject")
         self.machine.events.post("final_showdown_mode_complete")
+        self._schedule_completion_stop()
 
     def _fail_showdown(self, title="KINGPIN GETS AWAY", subtitle="FINAL SHOWDOWN LOST"):
         if self.mode_exiting:
             return
         self.mode_exiting = True
+        self.mode_done = True
         if self.current_phase in self.PHASES:
             self._cleanup_phase(self.current_phase)
         self.machine.events.post("cancel_mode_message_reminder")
@@ -1476,6 +1480,20 @@ class FinalShowdown(Mode):
         self.machine.events.post("final_showdown_stop_all_multiballs")
         self._show_message(title, subtitle)
         self.machine.events.post("final_showdown_mode_failed")
+        self._schedule_completion_stop()
+
+    def _schedule_completion_stop(self):
+        # Gameplay is already locked by mode_done / mode_exiting. Allow the
+        # terminal callout to finish while bookends/retirement proceed.
+        # Ball-end and bonus stop events in YAML still stop immediately.
+        self.delay.reset(
+            name="final_showdown_completion_stop",
+            ms=2000,
+            callback=self._post_completion_stop,
+        )
+
+    def _post_completion_stop(self):
+        self.machine.events.post("final_showdown_delayed_stop")
 
     def _test_last_ball_lost(self, **kwargs):
         del kwargs

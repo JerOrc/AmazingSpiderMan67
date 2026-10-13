@@ -8,9 +8,9 @@
 mode:
   start_events: start_mode_noah_boddy
   stop_events:
+  - stop_mode_noah_boddy
   - ball_will_end
   - bonus_start
-  - noah_boddy_mode_complete
   - noah_boddy_mode_completed_summary
   - ball_ended
   code: noah_boddy.NoahBoddy

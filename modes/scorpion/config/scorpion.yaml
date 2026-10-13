@@ -3,10 +3,9 @@
 mode:
   start_events: start_mode_scorpion
   stop_events:
+    - stop_mode_scorpion
     - ball_will_end
     - bonus_start
-    - scorpion_mode_complete
-    - scorpion_mode_completed_summary
     - ball_ended
   code: scorpion.Scorpion
   priority: 300

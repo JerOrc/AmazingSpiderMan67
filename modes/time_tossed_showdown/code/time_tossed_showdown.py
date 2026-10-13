@@ -656,7 +656,7 @@ class TimeTossedShowdown(Mode):
         self.machine.events.post("time_tossed_showdown_mode_complete")
         self.machine.events.post("hide_mode_status")
         self.machine.events.post("cancel_mode_message_reminder")
-        self.machine.events.post("stop_mode_time_tossed_showdown")
+        # villain_progression stops the gameplay mode after the audio hold.
 
     # ------------------------------------------------------------------
     # Scoring / status

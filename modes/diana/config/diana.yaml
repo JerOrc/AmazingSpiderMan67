@@ -8,10 +8,9 @@
 mode:
   start_events: start_mode_diana
   stop_events:
+    - stop_mode_diana
     - ball_will_end
     - bonus_start
-    - diana_mode_complete
-    - diana_mode_completed_summary
     - ball_ended
   code: diana.Diana
   priority: 300

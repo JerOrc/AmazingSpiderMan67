@@ -3,6 +3,7 @@
 mode:
   start_events: start_mode_desperado
   stop_events:
+    - stop_mode_desperado
     - ball_will_end
     - bonus_start
     - desperado_mode_completed_summary

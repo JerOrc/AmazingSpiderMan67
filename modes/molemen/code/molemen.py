@@ -68,6 +68,7 @@ class Molemen(CaseFileMixin, Mode):
         super().mode_start(**kwargs)
         self.reset_active_mode_summary(stat_count=3)
         self.mode_exiting = False
+        self.mode_done = False
         self.jackpots_collected = 0
         self.biggest_jackpot = 0
 
@@ -110,6 +111,7 @@ class Molemen(CaseFileMixin, Mode):
 
     def mode_stop(self, **kwargs):
         self.mode_exiting = True
+        self.mode_done = True
         self.delay.remove("molemen_ball_added_message")
         self.machine.events.post("molemen_clear_all_lights")
         self.machine.events.post("clear_saucers_delayed")
@@ -136,7 +138,7 @@ class Molemen(CaseFileMixin, Mode):
 
     def _reset_player_vars(self):
         player = self.machine.game.player
-        player["active_mode_points"] = self.villain_start_bonus
+        player["active_mode_points"] = 0
         player["molemen_state"] = 1
         player["active_mode_stat_1"] = self.biggest_jackpot
         player["active_mode_stat_2"] = self.jackpots_collected
@@ -252,6 +254,7 @@ class Molemen(CaseFileMixin, Mode):
         if self.mode_exiting:
             return
         self.mode_exiting = True
+        self.mode_done = True
         self.machine.game.player["molemen_state"] = 2
         self.machine.events.post("molemen_mode_complete")
 
@@ -288,7 +291,7 @@ class Molemen(CaseFileMixin, Mode):
         return int(self.machine.game.balls_in_play or 0)
 
     def _score(self, points):
-        if points <= 0:
+        if self.mode_done or points <= 0:
             return
         player = self.machine.game.player
         player["score"] += points

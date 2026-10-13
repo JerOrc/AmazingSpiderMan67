@@ -3,9 +3,9 @@
 mode:
   start_events: start_mode_kotep
   stop_events:
+  - stop_mode_kotep
   - ball_will_end
   - bonus_start
-  - kotep_mode_complete
   - ball_ended
   code: kotep.Kotep
   priority: 300

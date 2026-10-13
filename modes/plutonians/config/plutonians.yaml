@@ -15,11 +15,9 @@
 mode:
   start_events: start_mode_plutonians
   stop_events:
+  - stop_mode_plutonians
   - ball_will_end
   - bonus_start
-  - plutonians_mode_complete
-  - plutonians_mode_failed
-  - plutonians_mode_completed_summary
   - ball_ended
   code: plutonians.Plutonians
   priority: 300

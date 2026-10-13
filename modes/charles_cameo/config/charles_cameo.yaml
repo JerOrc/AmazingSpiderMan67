@@ -7,9 +7,9 @@
 mode:
   start_events: start_mode_charles_cameo
   stop_events:
+  - stop_mode_charles_cameo
   - ball_will_end
   - bonus_start
-  - charles_cameo_mode_complete
   - charles_cameo_mode_completed_summary
   - ball_ended
   code: charles_cameo.CharlesCameo

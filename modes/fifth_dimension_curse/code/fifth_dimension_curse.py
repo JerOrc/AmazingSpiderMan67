@@ -433,7 +433,7 @@ class FifthDimensionCurse(Mode):
         self.mode_done = True
         self.machine.game.player[f"{self.MODE_KEY}_state"] = 2
         self.machine.events.post(f"{self.MODE_KEY}_mode_complete")
-        self.machine.events.post(f"stop_mode_{self.MODE_KEY}")
+        # villain_progression stops the gameplay mode after the audio hold.
 
     def _update_gate_and_status(self):
         zones = len(self.active_zones)

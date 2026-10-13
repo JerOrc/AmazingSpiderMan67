@@ -3,9 +3,9 @@
 mode:
   start_events: start_mode_infinata
   stop_events:
+    - stop_mode_infinata
     - ball_will_end
     - bonus_start
-    - infinata_mode_complete
     - ball_ended
   code: infinata.Infinata
   priority: 300

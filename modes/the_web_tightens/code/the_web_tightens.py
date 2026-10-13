@@ -1671,4 +1671,4 @@ class TheWebTightens(Mode):
         self.machine.events.post("the_web_tightens_mode_complete")
         self.machine.events.post("hide_mode_status")
         self.machine.events.post("cancel_mode_message_reminder")
-        self.machine.events.post("stop_mode_the_web_tightens")
+        # Progression stops the mode after the two-second audio window.

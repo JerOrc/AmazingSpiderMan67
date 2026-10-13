@@ -8,9 +8,9 @@
 mode:
   start_events: start_mode_dr_manta
   stop_events:
+  - stop_mode_dr_manta
   - ball_will_end
   - bonus_start
-  - dr_manta_mode_complete
   - dr_manta_mode_completed_summary
   - ball_ended
   code: dr_manta.DrManta

@@ -3,10 +3,9 @@
 mode:
   start_events: start_mode_fly_twins
   stop_events:
+    - stop_mode_fly_twins
     - ball_will_end
     - bonus_start
-    - fly_twins_mode_complete
-    - fly_twins_mode_completed_summary
     - ball_ended
   code: fly_twins.FlyTwins
   priority: 500

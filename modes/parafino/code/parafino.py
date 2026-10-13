@@ -140,6 +140,7 @@ class Parafino(CaseFileMixin, Mode):
         ])
 
         self.mode_exiting = False
+        self.mode_done = False
         self.zone_hits = 0
         self.total_jackpots = 0
         self._reset_player_vars()
@@ -171,6 +172,7 @@ class Parafino(CaseFileMixin, Mode):
         self.machine.events.post("hide_mode_status")
         self.clear_active_case_file_helpers()
         self.mode_exiting = True
+        self.mode_done = True
         self.delay.remove("parafino_start_safety_net")
         self.delay.remove("parafino_ball_added_message")
         self.machine.events.post("parafino_clear_all_lights")
@@ -229,7 +231,7 @@ class Parafino(CaseFileMixin, Mode):
     def _reset_player_vars(self):
         player = self.machine.game.player
 
-        player["active_mode_points"] = self.villain_start_bonus
+        player["active_mode_points"] = 0
         player["parafino_state"] = 1
         player["active_mode_stat_1"] = self.zone_hits
         player["parafino_jackpots"] = 0
@@ -484,6 +486,7 @@ class Parafino(CaseFileMixin, Mode):
     def _multiball_ended(self, **kwargs):
         self.info_log("Parafino multiball ended.")
         self.mode_exiting = True
+        self.mode_done = True
         self.delay.remove("parafino_start_safety_net")
         self.delay.remove("parafino_ball_added_message")
         self.machine.events.post("clear_saucers_delayed")
@@ -491,7 +494,7 @@ class Parafino(CaseFileMixin, Mode):
         self.machine.events.post("parafino_mode_complete")
 
     def _score(self, points):
-        if points <= 0:
+        if self.mode_done or points <= 0:
             return
 
         player = self.machine.game.player

@@ -3,10 +3,9 @@
 mode:
   start_events: start_mode_clive_blotto
   stop_events:
+    - stop_mode_clive_blotto
     - ball_will_end
     - bonus_start
-    - clive_blotto_mode_complete
-    - clive_blotto_mode_failed
     - ball_ended
   code: clive_blotto.CliveBlotto
   priority: 300

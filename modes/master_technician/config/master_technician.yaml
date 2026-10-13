@@ -7,9 +7,9 @@
 mode:
   start_events: start_mode_master_technician
   stop_events:
+    - stop_mode_master_technician
     - ball_will_end
     - bonus_start
-    - master_technician_mode_complete
     - ball_ended
   code: master_technician.MasterTechnician
   priority: 300

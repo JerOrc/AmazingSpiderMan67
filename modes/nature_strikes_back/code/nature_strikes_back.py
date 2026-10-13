@@ -524,7 +524,7 @@ class NatureStrikesBack(Mode):
         self.machine.events.post("nature_strikes_back_mode_complete")
         self.machine.events.post("hide_mode_status")
         self.machine.events.post("cancel_mode_message_reminder")
-        self.machine.events.post("stop_mode_nature_strikes_back")
+        # villain_progression stops the gameplay mode after the audio hold.
 
     def _score(self, points):
         player = self.machine.game.player

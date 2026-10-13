@@ -8,10 +8,9 @@
 mode:
   start_events: start_mode_spider_men
   stop_events:
+    - stop_mode_spider_men
     - ball_will_end
     - bonus_start
-    - spider_men_mode_complete
-    - spider_men_mode_failed
     - spider_men_mode_completed_summary
     - ball_ended
   code: spider_men.SpiderMen

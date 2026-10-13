@@ -108,7 +108,7 @@ class Plutonians(CaseFileMixin, Mode):
         self.reset_active_mode_summary(stat_count=3)
         self.mode_done = False
         self.thawed = set()
-        self.mode_points = self.villain_start_bonus
+        self.mode_points = 0
         self.total_thaws = 0
         self.freeze_ray_blockers = 0
 
@@ -146,7 +146,7 @@ class Plutonians(CaseFileMixin, Mode):
         self.ray_seconds = self.FREEZE_CYCLE_SECONDS
 
         player = self.machine.game.player
-        player["active_mode_points"] = self.villain_start_bonus
+        player["active_mode_points"] = 0
         player["active_mode_stat_1"] = 0
         player["active_mode_stat_2"] = 0
         player[f"{self.MODE_KEY}_state"] = 1
@@ -364,11 +364,8 @@ class Plutonians(CaseFileMixin, Mode):
             message_mode_subtitle="REPAIRED",
             message_mode_value=self.completion_value,
         )
-        self.delay.add(
-            name="plutonians_victory_hold",
-            ms=self.VICTORY_HOLD_MS,
-            callback=self._finish_victory,
-        )
+        # Summary begins now; shared progression delays teardown by two seconds.
+        self._finish_victory()
 
     def _finish_victory(self, **kwargs):
         self.machine.events.post("cancel_mode_message_reminder")

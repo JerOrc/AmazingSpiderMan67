@@ -6,10 +6,9 @@
 mode:
   start_events: start_mode_brutus
   stop_events:
+    - stop_mode_brutus
     - ball_will_end
     - bonus_start
-    - brutus_mode_complete
-    - brutus_mode_completed_summary
     - ball_ended
   code: brutus.Brutus
   priority: 300

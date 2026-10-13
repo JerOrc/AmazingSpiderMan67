@@ -3,11 +3,9 @@
 mode:
   start_events: start_mode_fiddler
   stop_events:
+    - stop_mode_fiddler
     - ball_will_end
     - bonus_start
-    - fiddler_mode_complete
-    - fiddler_mode_failed
-    - fiddler_mode_completed_summary
     - ball_ended
   code: fiddler.Fiddler
   priority: 300

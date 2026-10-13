@@ -94,7 +94,7 @@ class Igor(CaseFileMixin, Mode):
         self.current_set = None
         self.jackpots = 0
         self.bad_shots = 0
-        self.mode_points = self.villain_start_bonus
+        self.mode_points = 0
         self.biggest_jackpot = 0
         self.next_jackpot = self.STARTING_JACKPOT
         self.shot_assist_available = False
@@ -267,11 +267,8 @@ class Igor(CaseFileMixin, Mode):
         self.machine.events.post("hide_mode_status")
         self._sync_vars(update_status=False)
         self._show_message("IGOR'S DEFENSES WIN")
-        self.delay.add(
-            name="igor_final_message",
-            ms=self.FINAL_MESSAGE_MS,
-            callback=self._finish_mode,
-        )
+        # Keep the mode alive during the callout via shared progression delay.
+        self._finish_mode()
 
     def _finish_mode(self, **kwargs):
         if not self.mode_done:

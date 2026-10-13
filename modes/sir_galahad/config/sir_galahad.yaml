@@ -3,10 +3,9 @@
 mode:
   start_events: start_mode_sir_galahad
   stop_events:
+    - stop_mode_sir_galahad
     - ball_will_end
     - bonus_start
-    - sir_galahad_mode_complete
-    - sir_galahad_mode_completed_summary
     - ball_ended
   code: sir_galahad.SirGalahad
   priority: 300

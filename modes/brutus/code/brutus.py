@@ -68,7 +68,7 @@ class Brutus(CaseFileMixin, Mode):
         self.jackpots = 0
         self.blocked_saucers = 0
         self.biggest_jackpot = 0
-        self.mode_points = self.villain_start_bonus
+        self.mode_points = 0
         self.shot_assist_used = False
 
         player = self.machine.game.player
@@ -251,11 +251,8 @@ class Brutus(CaseFileMixin, Mode):
             self.machine.events.post("cancel_mode_message_reminder")
             self.mode_done = True
             self.machine.game.player[f"{self.MODE_KEY}_state"] = 2
-            self.delay.reset(
-                name="brutus_finish",
-                ms=self.ROUND_TRANSITION_MS,
-                callback=lambda: self.machine.events.post("brutus_mode_complete"),
-            )
+            # Shared progression handles the two-second live-mode audio window.
+            self.machine.events.post("brutus_mode_complete")
             return
 
         self._schedule_next_round()

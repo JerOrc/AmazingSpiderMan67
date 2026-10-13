@@ -57,7 +57,7 @@ class DrMagneto(CaseFileMixin, Mode):
         self.case_files = self.get_case_file_bonuses()
         self.mode_done = False
         self.phase = "circuits"
-        self.mode_points = self.villain_start_bonus
+        self.mode_points = 0
         self.rollovers_collected = 0
         self.pops_completed = 0
         self.super_jackpots = 0
@@ -384,7 +384,7 @@ class DrMagneto(CaseFileMixin, Mode):
         self.machine.events.post("dr_magneto_super_collected", value=value)
         self._show_jackpot("MAGNETO SUPER", value)
         self.machine.events.post("villain_summary_delay_for_final_award")
-        self.delay.reset(name="dr_magneto_final_complete", ms=2000, callback=self._complete_mode)
+        self._complete_mode()
 
     def _light_star(self):
         if not self.has_case_file("more_jackpots") or self.mode_done:

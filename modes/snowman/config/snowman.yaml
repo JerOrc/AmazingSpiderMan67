@@ -9,9 +9,9 @@
 mode:
   start_events: start_mode_snowman
   stop_events:
+    - stop_mode_snowman
     - ball_will_end
     - bonus_start
-    - snowman_mode_complete
     - snowman_mode_completed_summary
     - ball_ended
   code: snowman.Snowman

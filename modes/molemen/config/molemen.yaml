@@ -3,9 +3,9 @@
 mode:
   start_events: start_mode_molemen
   stop_events:
+    - stop_mode_molemen
     - ball_will_end
     - bonus_start
-    - molemen_mode_complete
     - molemen_mode_completed_summary
     - ball_ended
   code: molemen.Molemen

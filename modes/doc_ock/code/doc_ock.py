@@ -72,7 +72,7 @@ class doc_ock(CaseFileMixin, Mode):
         self.jackpots_collected = 0
         self.active_breakouts = set()
         self.doc_ock_max_arms_locked = 2
-        self.active_mode_points = self.villain_start_bonus
+        self.active_mode_points = 0
         self.safety_net_used = False
         self.rooftop_gate_open = False
 
@@ -475,11 +475,8 @@ class doc_ock(CaseFileMixin, Mode):
         self._cancel_spinner_messages()
         self.machine.events.post("hide_mode_status")
         self._post_high_priority_message("DOCTOR OCTOPUS HAS BROKEN FREE!", long=True)
-        self.delay.add(
-            name=self.COMPLETION_HOLD_DELAY_NAME,
-            ms=2000,
-            callback=self._complete_mode,
-        )
+        # Gameplay is locked by mode_finishing; defer MPF teardown centrally.
+        self._complete_mode()
 
     def _complete_mode(self, **kwargs):
         if not self.mode_finishing:

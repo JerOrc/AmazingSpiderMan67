@@ -56,7 +56,7 @@ class Desperado(Mode, CaseFileMixin):
         self.round_number = 1
         self.round_hits = 0
         self.remaining_seconds = self.BASE_SECONDS
-        self.mode_points = self.villain_start_bonus
+        self.mode_points = 0
         self.new_target_value = self.NEW_TARGET_VALUE
         self.duplicate_target_value = self.DUPLICATE_TARGET_VALUE
         self.extra_round_qualified = False
@@ -104,7 +104,7 @@ class Desperado(Mode, CaseFileMixin):
     def _reset_shared_vars(self):
         player = self.machine.game.player
         player["desperado_state"] = 1
-        player["active_mode_points"] = self.villain_start_bonus
+        player["active_mode_points"] = 0
         player["active_mode_stat_1"] = self.bank_hits
         player["active_mode_stat_2"] = self.outlaws
 
@@ -299,6 +299,8 @@ class Desperado(Mode, CaseFileMixin):
         self.machine.game.player["active_mode_stat_1"] = self.bank_hits
 
     def _score(self, points):
+        if self.mode_done:
+            return
         player = self.machine.game.player
         player["score"] += points
         self.mode_points += points

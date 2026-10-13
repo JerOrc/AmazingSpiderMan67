@@ -16,6 +16,15 @@ class VillainProgression(Mode):
     Display labels are produced only for the chapter/status widgets.
     """
 
+    # Chapter wizard completion audio holds (Batches 1 and 2).
+    # Ball drain and tilt still stop these modes through their YAML stop_events.
+    DEFERRED_MINI_WIZARD_STOPS = frozenset({
+        "sinister_surge", "mastermind_trap", "trubble_unleashed",
+        "crime_wave", "the_web_tightens",
+        "fifth_dimension_curse", "mad_science_meltdown", "nature_strikes_back",
+        "invasion_from_everywhere", "who_is_the_real_villain", "time_tossed_showdown",
+    })
+
     # Durable progression states. These match config/player_vars.yaml.
     # 0 = not played, 1 = playing, 2 = completed.
     # Do not use a FAILED state for progression; a started mode is consumed
@@ -1507,7 +1516,17 @@ class VillainProgression(Mode):
         player["chapter_select_waiting_for_summary"] = 1
         self.machine.events.post("chapter_select_pending_drain", chapter_number=chapter_number, chapter_name=chapter["name"])
 
-        self.machine.events.post(f"stop_mode_{mini_key}")
+        # Preserve the completed wizard's mode-owned audio for two seconds.
+        # All patched wizard gameplay paths lock with mode_done / mode_exiting
+        # before posting their completion event. The summary starts as usual.
+        if mini_key in self.DEFERRED_MINI_WIZARD_STOPS:
+            self.delay.reset(
+                name=f"{mini_key}_deferred_gameplay_stop",
+                ms=2000,
+                callback=lambda key=mini_key: self.machine.events.post(f"stop_mode_{key}"),
+            )
+        else:
+            self.machine.events.post(f"stop_mode_{mini_key}")
 
         self.delay.add(
             name=f"{mini_key}_summary_after_mode_stop",
@@ -2076,6 +2095,26 @@ class VillainProgression(Mode):
     def _start_villain(self, villain_key):
         info = self.VILLAINS[villain_key]
 
+        # A ball may drain while this villain's intro is still on screen.
+        # Bookends identifies the newly selected villain immediately, but its
+        # gameplay mode (which normally initializes these shared stats) will
+        # not start until the intro finishes. Clear the previous villain's
+        # summary values before assigning the new villain identity.
+        # The gameplay mode remains responsible for its own starting awards.
+        player = self.machine.game.player
+        for variable in (
+            "active_mode_points",
+            "active_mode_completed",
+            "active_mode_stat_1",
+            "active_mode_stat_2",
+            "active_mode_hits",
+            "active_mode_major_hits",
+        ):
+            player[variable] = 0
+        # An intro-time drain should display the selected villain's labeled
+        # stats as zero; modes can set their own count when gameplay starts.
+        player["active_mode_stat_count"] = 3
+
         self._add_villain_case_files_to_chapter_total(villain_key)
 
         # Progression is tracked only by numeric *_state.
@@ -2162,10 +2201,61 @@ class VillainProgression(Mode):
         if completed:
             self.machine.events.post("villain_summary_preserve_final_message")
 
-        # Ask MPF to stop the active gameplay mode now. The mode YAML also has
-        # the concrete complete/fail events in stop_events, but this keeps the
-        # behavior explicit from the single progression pipeline.
-        self.machine.events.post(f"stop_mode_{villain_key}")
+        # Keep completed gameplay modes alive briefly so mode-owned final-award
+        # callouts can finish. All modes in this set already latch mode_done
+        # before posting their completion event. Ball-end/tilt cleanup remains
+        # immediate through each mode's own stop_events.
+        deferred_keys = {
+            "rhino", "sandman", "vulture", "goblin", "electro", "mysterio", "scorpion",
+            "lizard", "cerberus", "diana", "cyclops",
+            "vulcan", "centaur", "plotter", "fly_twins",
+            "fifth_avenue_phantom", "enforcers", "doctor_cool",
+            "harley_clivendon",
+            "conquistador",
+            "metal_eating_robot",
+            "fiddler",
+            "pardo",
+            "fakir",
+            "kotep",
+            "super_swami",
+            "infinata",
+            "noah_boddy",
+            "professor_pretorius",
+            "doctor_dumpty",
+            "dr_von_schlick",
+            "dr_manta",
+            "dr_zapp",
+            "bolton_boomer",
+            "snowman",
+            "doctor_atlantean",
+            "devargas",
+            "charles_cameo",
+            "skymaster",
+            "master_vine",
+            "conners_reptiles",
+            "master_technician",
+            "spider_men",
+            "desperado",
+            "von_rantenraven",
+            "molemen",
+            "parafino",
+            "doc_ock",
+            "spider_slayer",
+            "dr_magneto",
+            "clive_blotto",
+            "plutonians",
+            "igor",
+            "brutus",
+            "sir_galahad",
+        }
+        if villain_key in deferred_keys:
+            self.delay.add(
+                name=f"{villain_key}_deferred_gameplay_stop",
+                ms=2000,
+                callback=lambda key=villain_key: self.machine.events.post(f"stop_mode_{key}"),
+            )
+        else:
+            self.machine.events.post(f"stop_mode_{villain_key}")
 
         # Let mode_stop/widget/show cleanup happen before the summary widget is
         # displayed. This prevents gameplay lights/shows from overlapping the

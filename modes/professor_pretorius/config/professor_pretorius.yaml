@@ -5,9 +5,9 @@
 mode:
   start_events: start_mode_professor_pretorius
   stop_events:
+  - stop_mode_professor_pretorius
   - ball_will_end
   - bonus_start
-  - professor_pretorius_mode_complete
   - professor_pretorius_mode_completed_summary
   - ball_ended
   code: professor_pretorius.ProfessorPretorius

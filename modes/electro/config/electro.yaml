@@ -4,10 +4,9 @@
 mode:
   start_events: start_mode_electro
   stop_events:
+    - stop_mode_electro
     - ball_will_end
     - bonus_start
-    - electro_mode_complete
-    - electro_mode_completed_summary
     - ball_ended
   code: electro.Electro
   priority: 300
@@ -75,11 +74,6 @@ sound_player:
 
   electro_jackpot_collected_3:
     light_smash_3:
-      action: play
-      bus: effects
-
-  electro_super_collected:
-    jackpot:
       action: play
       bus: effects
 

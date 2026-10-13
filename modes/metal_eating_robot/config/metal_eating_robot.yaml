@@ -3,10 +3,9 @@
 mode:
   start_events: start_mode_metal_eating_robot
   stop_events:
+    - stop_mode_metal_eating_robot
     - ball_will_end
     - bonus_start
-    - metal_eating_robot_mode_complete
-    - metal_eating_robot_mode_completed_summary
     - ball_ended
   code: metal_eating_robot.MetalEatingRobot
   priority: 500

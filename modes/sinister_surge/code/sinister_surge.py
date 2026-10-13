@@ -155,6 +155,7 @@ class SinisterSurge(Mode):
         super().mode_start(**kwargs)
 
         self._runtime_state = {}
+        self.mode_done = False
         self.mode_exiting = False
         self.current_area = None
         self.jackpot_ready = False
@@ -1291,6 +1292,9 @@ class SinisterSurge(Mode):
             self.delay.remove(name)
 
     def _multiball_ended(self, **kwargs):
+        if self.mode_done:
+            return
+        self.mode_done = True
         self.mode_exiting = True
         self.info_log("Sinister Surge multiball ended.")
 

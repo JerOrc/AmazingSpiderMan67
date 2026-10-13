@@ -71,6 +71,7 @@ class Goblin(CaseFileMixin, Mode):
         self.release_pending = False
         self.ejecting_saucers = set()
         self.mode_finishing = False
+        self.mode_done = False
         self.attack_total = 0
         self.chaos_scored = 0
         self.safe_hit_count = 0
@@ -109,7 +110,7 @@ class Goblin(CaseFileMixin, Mode):
         player["goblin_hold_active"] = 0
         self.attack_total = 0
         player["active_mode_stat_1"] = self.attack_total
-        player["active_mode_points"] = self.villain_start_bonus
+        player["active_mode_points"] = 0
         player["goblin_state"] = 1
         player["goblin_jackpot_value"] = (
             self.MORE_JACKPOTS_SCORE if self.more_jackpots else self.SAFE_IMMEDIATE_SCORE
@@ -528,6 +529,7 @@ class Goblin(CaseFileMixin, Mode):
         if self.mode_finishing:
             return
         self.mode_finishing = True
+        self.mode_done = True
         self.multiball_start_pending = False
         if self.held_saucer is not None:
             self.eject_held_saucer(reason="mode_finish")

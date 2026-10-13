@@ -619,7 +619,7 @@ class WhoIsTheRealVillain(Mode):
         self.machine.events.post("who_is_the_real_villain_mode_complete")
         self.machine.events.post("hide_mode_status")
         self.machine.events.post("cancel_mode_message_reminder")
-        self.machine.events.post("stop_mode_who_is_the_real_villain")
+        # villain_progression stops the gameplay mode after the audio hold.
 
     def _reset_bank(self, bank):
         self.delay.reset(

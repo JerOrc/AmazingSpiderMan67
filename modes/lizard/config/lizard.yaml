@@ -3,10 +3,9 @@
 mode:
   start_events: start_mode_lizard
   stop_events:
+    - stop_mode_lizard
     - ball_will_end
     - bonus_start
-    - lizard_mode_complete
-    - lizard_mode_completed_summary
     - ball_ended
   code: lizard.Lizard
   priority: 300
@@ -46,7 +45,7 @@ sound_player:
       bus: voice
       ducking:
         bus: music
-        attenuation: 0.9
+        attenuation: 0.5
         attack: 0.1
         release: 0.3
         release_point: 0.0
@@ -56,7 +55,7 @@ sound_player:
       bus: voice
       ducking:
         bus: music
-        attenuation: 0.9
+        attenuation: 0.5
         attack: 0.1
         release: 0.3
         release_point: 0.0
@@ -66,7 +65,7 @@ sound_player:
       bus: voice
       ducking:
         bus: music
-        attenuation: 0.9
+        attenuation: 0.5
         attack: 0.1
         release: 0.3
         release_point: 0.0
@@ -76,7 +75,7 @@ sound_player:
       bus: voice
       ducking:
         bus: music
-        attenuation: 0.9
+        attenuation: 0.5
         attack: 0.1
         release: 0.3
         release_point: 0.0
@@ -86,7 +85,7 @@ sound_player:
       bus: voice
       ducking:
         bus: music
-        attenuation: 0.9
+        attenuation: 0.5
         attack: 0.1
         release: 0.3
         release_point: 0.0

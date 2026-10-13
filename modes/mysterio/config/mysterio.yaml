@@ -3,10 +3,9 @@
 mode:
   start_events: start_mode_mysterio
   stop_events: 
+    - stop_mode_mysterio
     - ball_will_end
     - bonus_start
-    - mysterio_mode_complete
-    - mysterio_mode_completed_summary
     - ball_ended
   code: mysterio.Mysterio
   priority: 500
@@ -40,7 +39,7 @@ sound_player:
       bus: voice
       ducking:
         bus: music
-        attenuation: 0.9
+        attenuation: 0.5
         attack: 0.1
         release: 0.3
         release_point: 0.0
@@ -50,7 +49,7 @@ sound_player:
       bus: voice
       ducking:
         bus: music
-        attenuation: 0.9
+        attenuation: 0.5
         attack: 0.1
         release: 0.3
         release_point: 0.0
@@ -60,7 +59,7 @@ sound_player:
       bus: voice
       ducking:
         bus: music
-        attenuation: 0.9
+        attenuation: 0.5
         attack: 0.1
         release: 0.3
         release_point: 0.0
@@ -70,7 +69,7 @@ sound_player:
       bus: voice
       ducking:
         bus: music
-        attenuation: 0.9
+        attenuation: 0.5
         attack: 0.1
         release: 0.3
         release_point: 0.0

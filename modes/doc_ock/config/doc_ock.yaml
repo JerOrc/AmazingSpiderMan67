@@ -3,10 +3,9 @@
 mode:
   start_events: start_mode_doc_ock
   stop_events:
+    - stop_mode_doc_ock
     - ball_will_end
     - bonus_start
-    - doc_ock_mode_complete
-    - doc_ock_mode_completed_summary
     - ball_ended
   code: doc_ock.doc_ock
   priority: 600

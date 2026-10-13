@@ -3,9 +3,9 @@
 mode:
   start_events: start_mode_dr_von_schlick
   stop_events:
+  - stop_mode_dr_von_schlick
   - ball_will_end
   - bonus_start
-  - dr_von_schlick_mode_complete
   - ball_ended
   code: dr_von_schlick.DrVonSchlick
   priority: 300

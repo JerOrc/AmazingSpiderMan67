@@ -8,10 +8,9 @@
 mode:
   start_events: start_mode_pardo
   stop_events:
+  - stop_mode_pardo
   - ball_will_end
   - bonus_start
-  - pardo_mode_complete
-  - pardo_mode_completed_summary
   - ball_ended
   code: pardo.Pardo
   priority: 300

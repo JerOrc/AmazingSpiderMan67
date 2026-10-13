@@ -3,9 +3,9 @@
 mode:
   start_events: start_mode_vulture
   stop_events:
+    - stop_mode_vulture
     - ball_will_end
     - bonus_start
-    - vulture_mode_complete
     - vulture_mode_completed_summary
     - ball_ended
   code: vulture.Vulture

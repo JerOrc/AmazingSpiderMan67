@@ -38,13 +38,16 @@ class Vulture(CaseFileMixin, Mode):
         self.reset_active_mode_summary(stat_count=3)
         self.machine.game.player["active_mode_stat_2"] = self.machine.game.player["vulture_bonus"]
 
+        self.mode_done = False
+        self.add_mode_event_handler("vulture_mode_complete", self._mark_mode_done, priority=1000)
+
         self.started = False
         self.upper_balls = 0
         self.add_a_ball_awarded = False
 
         self.vulture_spins = 0
         self.vulture_banked_bonus = 0
-        self.active_mode_points = self.villain_start_bonus
+        self.active_mode_points = 0
 
         self.case_files = self.get_case_file_bonuses()
         self._apply_case_file_bonuses()
@@ -79,6 +82,14 @@ class Vulture(CaseFileMixin, Mode):
         self.machine.events.post("vulture_gi_lower")
         self._show_message("VULTURE", "GET TO THE ROOFTOP", reminder=True)
         self.machine.events.post("show_mode_status", mode_status_title="ROOF ACCESS", mode_status_value="GET TO ROOFTOP")
+
+    def _mark_mode_done(self, **kwargs):
+        """Latch gameplay closed before progression begins the summary."""
+        if self.mode_done:
+            return
+        self.mode_done = True
+        for target in self.stages:
+            self.delay.remove(f"vulture_target_timer_{target}")
 
     def mode_stop(self, **kwargs):
         for target in self.stages:
@@ -116,6 +127,8 @@ class Vulture(CaseFileMixin, Mode):
             self.machine.events.post("start_case_file_ball_save")
 
     def upper_entered(self, **kwargs):
+        if self.mode_done:
+            return
         self.upper_balls += 1
         self.machine.events.post("vulture_gi_upper")
 
@@ -129,6 +142,8 @@ class Vulture(CaseFileMixin, Mode):
         self.update_player_vars()
 
     def upper_exited(self, **kwargs):
+        if self.mode_done:
+            return
         if self.upper_balls > 0:
             self.upper_balls -= 1
 
@@ -145,6 +160,8 @@ class Vulture(CaseFileMixin, Mode):
         )
 
     def timer_tick(self, ticks=None, **kwargs):
+        if self.mode_done:
+            return
         if not self.started:
             return
         remaining = ticks
@@ -171,6 +188,8 @@ class Vulture(CaseFileMixin, Mode):
             self.machine.events.post("vulture_two_balls_upper")
 
     def target_hit(self, target, **kwargs):
+        if self.mode_done:
+            return
         all_red_before_hit = all(stage == 2 for stage in self.stages.values())
 
         if self.shot_assist_available:
@@ -195,6 +214,8 @@ class Vulture(CaseFileMixin, Mode):
         self.update_player_vars()
 
     def award_add_a_ball(self):
+        if self.mode_done:
+            return
         if self.add_a_ball_awarded:
             return
 
@@ -205,6 +226,8 @@ class Vulture(CaseFileMixin, Mode):
         self._show_message("SKY ATTACK", "SPIN TO COLLECT VULTURE BONUS", reminder=True)
 
     def spinner_hit(self, **kwargs):
+        if self.mode_done:
+            return
         if not self.started:
             return
 
@@ -235,11 +258,15 @@ class Vulture(CaseFileMixin, Mode):
         )
 
     def bank_bonus(self, value):
+        if self.mode_done:
+            return
         player = self.machine.game.player
         player["vulture_bonus"] = player["vulture_bonus"] + value
         player["active_mode_stat_2"] = player["vulture_bonus"]
 
     def target_timer_expired(self, target, **kwargs):
+        if self.mode_done:
+            return
         if self.stages.get(target) != 2:
             return
 
@@ -251,6 +278,8 @@ class Vulture(CaseFileMixin, Mode):
         self.update_player_vars()
 
     def show_targets(self, **kwargs):
+        if self.mode_done:
+            return
         for target, stage in self.stages.items():
             color = self.stage_name(stage)
             self.machine.events.post(f"vulture_show_{target}_{color}")
@@ -272,6 +301,8 @@ class Vulture(CaseFileMixin, Mode):
         player["vulture_add_a_ball_awarded"] = int(self.add_a_ball_awarded)
 
     def award_score(self, value):
+        if self.mode_done:
+            return
         self.machine.game.player["score"] += value
         self.active_mode_points += value
         self.machine.game.player["active_mode_points"] = self.active_mode_points

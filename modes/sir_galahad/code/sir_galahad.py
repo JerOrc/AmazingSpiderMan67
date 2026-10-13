@@ -95,7 +95,7 @@ class SirGalahad(CaseFileMixin, Mode):
         self.programmatic_drops = set()
         self.drops_down = set()
         self.shot_assist_available = self.has_case_file("shot_assist")
-        self.mode_points = self.villain_start_bonus
+        self.mode_points = 0
         self.target_hits = 0
         self.bullseyes = 0
 
@@ -454,11 +454,8 @@ class SirGalahad(CaseFileMixin, Mode):
             message_mode_subtitle="JOUST SCORE",
             message_mode_value=self.mode_points,
         )
-        self.delay.reset(
-            name="sir_galahad_complete_hold",
-            ms=self.COMPLETION_HOLD_MS,
-            callback=lambda: self.machine.events.post("sir_galahad_mode_complete"),
-        )
+        # Shared progression provides the live-mode completion hold.
+        self.machine.events.post("sir_galahad_mode_complete")
 
     def _values_for_bank(self, bank):
         if bank == "left":

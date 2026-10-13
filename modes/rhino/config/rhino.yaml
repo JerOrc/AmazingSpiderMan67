@@ -5,9 +5,7 @@ mode:
   stop_events:
     - ball_will_end
     - bonus_start
-    - rhino_bash_complete
-    - rhino_mode_complete
-    - rhino_mode_completed_summary
+    - stop_mode_rhino
     - ball_ended
   code: rhino.RhinoBash
   priority: 300

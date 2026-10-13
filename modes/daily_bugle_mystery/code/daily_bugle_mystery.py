@@ -523,6 +523,18 @@ class DailyBugleMystery(Mode):
             return
 
         if not self.mystery_ready:
+            # With A+B completed, the VUK is accessible even before the
+            # current photo threshold is met. Explain the missing requirement
+            # without delaying the normal non-ready VUK eject.
+            if self.mystery_ab_ready:
+                photos_needed = max(0, self._current_picture_cost() - self.rooftop_photos)
+                if photos_needed > 0:
+                    photo_word = "PHOTO" if photos_needed == 1 else "PHOTOS"
+                    self.machine.events.post(
+                        "show_mode_message_long",
+                        message_mode_title=f"{photos_needed} MORE {photo_word} NEEDED",
+                        message_mode_subtitle="SHOOT ROOFTOP SPINNER",
+                    )
             # VUK was hit but mystery is not ready. Kick up quickly for other uses.
             self.delay.add(
                 name="daily_bugle_vuk_delay_eject",
