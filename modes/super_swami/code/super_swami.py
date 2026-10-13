@@ -41,7 +41,7 @@ class SuperSwami(CaseFileMixin, Mode):
         self.machine.game.player["active_mode_stat_2"] = self.machine.game.player["super_swami_bonus"]
         self.mode_done = False
         self.restored = set()
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.case_files = self.get_case_file_bonuses()
         self.seconds_left = self.MORE_TIME_TIME if self.has_case_file("more_time") else self.BASE_TIME
         self.base_value = self.BIGGER_BASE_VALUE if self.has_case_file("bigger_jackpots") else self.BASE_VALUE
@@ -49,7 +49,7 @@ class SuperSwami(CaseFileMixin, Mode):
         self.final_jackpot_lit = False
 
         player = self.machine.game.player
-        player["active_mode_points"] = 0
+        player["active_mode_points"] = self.villain_start_bonus
         player["active_mode_stat_1"] = 0
         player[f"{self.MODE_KEY}_state"] = 1
 

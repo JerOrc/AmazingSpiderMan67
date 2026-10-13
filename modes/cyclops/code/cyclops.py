@@ -76,7 +76,7 @@ class Cyclops(CaseFileMixin, Mode):
         self.second_eye_seconds_remaining = 0
         self.eye_jackpots = 0
         self.best_jackpot = 0
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.flips_used = 0
         self.drops_hit = 0
         self.rubbers_hit = 0

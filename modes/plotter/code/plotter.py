@@ -53,7 +53,7 @@ class Plotter(CaseFileMixin, Mode):
         self.rumor_hits = 0
         self.lit_saucers = set()
         self.schemes = 0
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.vuk_lit = False
         self.vuk_pending = False
         self.vuk_collected = False
@@ -72,7 +72,7 @@ class Plotter(CaseFileMixin, Mode):
 
         player = self.machine.game.player
         player[f"{self.MODE_KEY}_state"] = 1
-        player["active_mode_points"] = 0
+        player["active_mode_points"] = self.villain_start_bonus
         player["active_mode_stat_1"] = 0
         player["active_mode_stat_2"] = 0
 

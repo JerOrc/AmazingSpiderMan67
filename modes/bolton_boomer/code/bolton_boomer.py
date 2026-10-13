@@ -65,7 +65,7 @@ class BoltonBoomer(CaseFileMixin, Mode):
         self.super_number = 0
         self.super_jackpots = 0
         self.biggest_super = 0
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.super_seconds = self.MORE_TIME_SUPER_SECONDS if self.has_case_file("more_time") else self.NORMAL_SUPER_SECONDS
         self.opening_save_seconds = self.SAFETY_NET_OPENING_SAVE if self.has_case_file("safety_net") else self.NORMAL_OPENING_SAVE
         self.target_value = self.BIGGER_TARGET_SCORE if self.has_case_file("bigger_jackpots") else self.TARGET_SCORE

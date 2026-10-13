@@ -1,0 +1,6 @@
+OUTLANE SAVE LIGHTING — October 7, 2026
+Both outlane inserts pulse white/blue while a save remains banked during single-ball play.
+The show follows the updated player bank count rather than stopping on every consume event.
+Spending one of several saves keeps the pulse active; spending the last stops it.
+The existing multiball suppression and restoration remain intact.
+Merge matching paths into the project root. YAML and scope checks passed; machine test pending.

@@ -80,7 +80,7 @@ class Vulcan(CaseFileMixin, Mode):
         self.case_files = self.get_case_file_bonuses()
 
         self.mode_done = False
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.jackpot_value = (
             self.BIGGER_BASE_JACKPOT
             if self.has_case_file("bigger_jackpots")

@@ -53,7 +53,7 @@ class DoctorDumpty(CaseFileMixin, Mode):
 
         self.mode_done = False
         self.phase = "gas"
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.balloons_popped = 0
         self.revealed_gas = set()
         self.cleared_gas = set()

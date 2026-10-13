@@ -59,7 +59,7 @@ class Sandman(CaseFileMixin, Mode):
         self.banks_completed = 0
         self.hit_order = []
         self.direction = 0 # 0 = L to R, 1 = R to L
-        self.active_mode_points = 0
+        self.active_mode_points = self.villain_start_bonus
         self.sandman_best_run = 0
         self.flash_hits = 0
         self.shot_assist = False

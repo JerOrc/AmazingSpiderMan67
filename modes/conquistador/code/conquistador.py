@@ -52,7 +52,7 @@ class Conquistador(CaseFileMixin, Mode):
         self.seconds_left = 0  # Opening left-drop phase is untimed.
         self.spins = 0
         self.target_hits = 0
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.jackpot_points = 0
         self.speed_bonus = 0
         self.jackpot_value = self.BIGGER_BASE_JACKPOT if self.has_case_file("bigger_jackpots") else self.BASE_JACKPOT

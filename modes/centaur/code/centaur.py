@@ -79,7 +79,7 @@ class Centaur(CaseFileMixin, Mode):
         self.mode_done = False
         self.phase = "build"
         self.drops_down = set()
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.jackpot_base_value = 0
         self.best_jackpot = 0
         self.jackpots_collected = 0

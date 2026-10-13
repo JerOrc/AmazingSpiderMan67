@@ -57,7 +57,7 @@ class DoctorAtlantean(CaseFileMixin, Mode):
         self.available_targets = set(self.TARGETS)
         self.control_panel_jackpots = 0
         self.spinner_spins = 0
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.spinner_jackpot_ready = False
         self.shot_assist_available = False
         self.rooftop_active = False

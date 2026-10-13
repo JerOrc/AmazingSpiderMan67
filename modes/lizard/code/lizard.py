@@ -164,7 +164,7 @@ class Lizard(CaseFileMixin, Mode):
         self._right_pop_hit = False
         self._star_10x_armed = False
 
-        player["active_mode_points"] = 0
+        player["active_mode_points"] = self.villain_start_bonus
         player["lizard_state"] = 1
 
     def _award_points(self, points):

@@ -1,6 +1,9 @@
 class CaseFileMixin:
     """Shared helper for villain modes that want to read global Case File bonuses."""
 
+    VILLAIN_START_BASE = 100_000
+    VILLAIN_START_PER_CASE_FILE = 50_000
+
     CASE_FILE_KEYS = (
         "more_jackpots",
         "bigger_jackpots",
@@ -116,14 +119,26 @@ class CaseFileMixin:
         self.machine.events.post("case_files_active_helpers_changed", helper_count=0)
 
     def reset_active_mode_summary(self, stat_count=3):
-        """Reset the shared villain summary handoff slots for a new mode."""
+        """Start a villain attempt and seed its summary with the start award.
+
+        Called once by each villain's mode_start, after the bookend intro.
+        Wizard modes do not use this helper. Local score accumulators must
+        start at villain_start_bonus so later summary updates retain it.
+        """
+        self.villain_start_bonus = 0
         player = self.machine.game.player if self.machine.game else None
         if not player:
             return
 
+        case_file_count = sum(self.get_case_file_bonuses().values())
+        self.villain_start_bonus = (
+            self.VILLAIN_START_BASE
+            + self.VILLAIN_START_PER_CASE_FILE * case_file_count
+        )
+        player["score"] += self.villain_start_bonus
         player["active_mode_stat_count"] = int(stat_count)
         player["active_mode_completed"] = 0
-        player["active_mode_points"] = 0
+        player["active_mode_points"] = self.villain_start_bonus
         player["active_mode_stat_1"] = 0
         player["active_mode_stat_2"] = 0
 

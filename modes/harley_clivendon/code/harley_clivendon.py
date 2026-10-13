@@ -86,7 +86,7 @@ class HarleyClivendon(CaseFileMixin, Mode):
 
         p = self.machine.game.player
         p["harley_clivendon_state"] = 1
-        p["active_mode_points"] = 0
+        p["active_mode_points"] = self.villain_start_bonus
         p["active_mode_stat_1"] = 0
         p["harley_biggest_jackpot"] = 0
         p["harley_areas_lit"] = 0

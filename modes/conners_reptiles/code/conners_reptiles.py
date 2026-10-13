@@ -78,7 +78,7 @@ class ConnersReptiles(CaseFileMixin, Mode):
         self.super_collected = False
         self.shot_assist_used = False
         self.pop_hits = 0
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.jackpots_collected = 0
         self.revealed_shots = set()
         self.lit_shots = set()

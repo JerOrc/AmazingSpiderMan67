@@ -98,7 +98,7 @@ class DeVargas(CaseFileMixin, Mode):
         self.opportunities_started = 0
         self.gold_shots = 0
         self.expired_shots = 0
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.gold_banked_this_mode = 0
         self.shot_assist_available = self.has_case_file("shot_assist")
         self.gate_open = False
@@ -178,7 +178,7 @@ class DeVargas(CaseFileMixin, Mode):
 
     def _reset_player_vars(self):
         player = self.machine.game.player
-        player["active_mode_points"] = 0
+        player["active_mode_points"] = self.villain_start_bonus
         player["active_mode_stat_1"] = 0
         player["devargas_state"] = 1
         self._sync_vars()

@@ -92,7 +92,7 @@ class MasterVine(CaseFileMixin, Mode):
         self.phase = "waiting_for_upper"
         self.attempt = 0
         self.seconds_left = 0
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.spinner_hits = 0
         self.spinner_hits_this_attempt = 0
         self.jackpot_awards = 0

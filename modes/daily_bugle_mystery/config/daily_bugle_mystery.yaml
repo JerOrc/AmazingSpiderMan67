@@ -183,10 +183,10 @@ sound_player:
       bus: effects
       ducking:
         bus: music
-        attenuation: 0.1
-        attack: 0.1
-        release: 0.5
-        release_point: 0.0
+        attack: 100ms
+        attenuation: 0.05
+        release_point: 0ms
+        release: 500ms        
 
   # Four randomized callout slots. They intentionally use the current line as
   # a placeholder until four replacement recordings are available.

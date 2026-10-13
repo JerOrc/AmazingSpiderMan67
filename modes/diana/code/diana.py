@@ -98,7 +98,7 @@ class Diana(CaseFileMixin, Mode):
         self.hunt_active = False
         self.post_hold_active = False
         self.safety_net_used = False
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.arrows_remaining = 30 if self.has_case_file("more_time") else self.STARTING_ARROWS
         self.arrows_used = 0
         self.spinner_hits = 0

@@ -78,7 +78,7 @@ class DrManta(CaseFileMixin, Mode):
         self.attack_seconds_remaining = 0
         self.jackpot_hits = 0
         self.biggest_jackpot = 0
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.shot_assist_available = self.has_case_file("shot_assist")
         self.second_ball_save_relaunching = False
 

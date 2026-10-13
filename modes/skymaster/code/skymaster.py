@@ -83,7 +83,7 @@ class Skymaster(CaseFileMixin, Mode):
         self.mode_done = False
         self.phase = "starting_reset"
         self.progress = 0
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.seconds_left = 0
         self.spinner_hits = 0
         self.spinner_steps_pending = 0

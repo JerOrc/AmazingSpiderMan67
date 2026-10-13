@@ -71,7 +71,7 @@ class Enforcers(Mode, CaseFileMixin):
         self.saucer_bonus_lit = {zone: False for zone in self.ZONES}
         self.saucer_bonus_collected = {zone: False for zone in self.ZONES}
 
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.upper_jackpots_collected = 0
         self.saucer_bonus_collected_count = 0
         self.spinner_spins = 0

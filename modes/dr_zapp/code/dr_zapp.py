@@ -37,7 +37,7 @@ class DrZapp(CaseFileMixin, Mode):
         self.collected_upper_targets = set()
         self.camera_flashes = 0
         self.spinner_spins = 0
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.seconds_left = 0
 
         player = self.machine.game.player

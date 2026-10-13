@@ -110,7 +110,7 @@ class NoahBoddy(CaseFileMixin, Mode):
         self.hurryup_seconds_left = 0
         self.hurryup_active = False
         self.upper_target_score = self.UPPER_TARGET_SCORE
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.upper_target_hits = 0
         self.spinner_hits = 0
         self.jackpots_collected = 0
@@ -247,7 +247,7 @@ class NoahBoddy(CaseFileMixin, Mode):
     def _init_player_vars(self):
         player = self.machine.game.player
         player["noah_boddy_state"] = 1
-        player["active_mode_points"] = 0
+        player["active_mode_points"] = self.villain_start_bonus
         player["noah_boddy_upper_target_hits"] = 0
         player["active_mode_stat_1"] = 0
         player["noah_boddy_jackpots"] = 0

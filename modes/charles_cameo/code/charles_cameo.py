@@ -86,7 +86,7 @@ class CharlesCameo(CaseFileMixin, Mode):
         self.source_hits = 0
         self.jackpots = 0
         self.biggest_jackpot = 0
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.shot_assist_used = False
 
         player = self.machine.game.player

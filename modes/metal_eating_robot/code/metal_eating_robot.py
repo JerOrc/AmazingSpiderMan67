@@ -75,7 +75,7 @@ class MetalEatingRobot(CaseFileMixin, Mode):
         self.reset_active_mode_summary(stat_count=3)
         self.case_files = self.get_case_file_bonuses()
         self.mode_done = False
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.saved_zones = set()
         self.destroyed_zones = set()
         self.attacked_zones = set()
@@ -115,7 +115,7 @@ class MetalEatingRobot(CaseFileMixin, Mode):
 
         player = self.machine.game.player
         player["metal_eating_robot_state"] = 1
-        player["active_mode_points"] = 0
+        player["active_mode_points"] = self.villain_start_bonus
         player["active_mode_stat_1"] = 0
         player["active_mode_stat_2"] = 0
         player["metal_zones_under_attack"] = 0

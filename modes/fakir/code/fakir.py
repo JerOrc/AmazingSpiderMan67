@@ -96,7 +96,7 @@ class Fakir(CaseFileMixin, Mode):
         self.super_jackpot_value = 0
         self.super_jackpots_collected = 0
         self.total_rubies_collected = 0
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.incorrect_shots = 0
 
         self.case_files = self.get_case_file_bonuses()

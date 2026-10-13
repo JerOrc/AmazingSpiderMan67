@@ -77,7 +77,7 @@ class Pardo(CaseFileMixin, Mode):
         self.first_guess_jps = 0
         self.second_guess_jps = 0
         self.round_awarding = False
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.current_groups = []
         self.correct_group = None
         self.first_round_all_good = False

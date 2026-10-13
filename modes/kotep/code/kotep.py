@@ -58,7 +58,7 @@ class Kotep(CaseFileMixin, Mode):
         self.mode_done = False
         self.completion_pending = False
         self.phase = "demons"
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.demons_destroyed = 0
         self.bonus_demons_destroyed = 0
         self.super_jackpots = 0
@@ -92,7 +92,7 @@ class Kotep(CaseFileMixin, Mode):
         self.demon_flash_on = {}
 
         player = self.machine.game.player
-        player["active_mode_points"] = 0
+        player["active_mode_points"] = self.villain_start_bonus
         player["active_mode_stat_1"] = 0
         player["active_mode_stat_2"] = 0
         player[f"{self.MODE_KEY}_state"] = 1

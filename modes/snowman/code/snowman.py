@@ -46,7 +46,7 @@ class Snowman(CaseFileMixin, Mode):
         self.starting_web = None
         self.required_web = None
         self.seconds_left = 0
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.bonus_spins = 0
         self.current_spin_value = self._base_spin_value()
         self.biggest_spin = 0

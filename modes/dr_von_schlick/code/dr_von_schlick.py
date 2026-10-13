@@ -61,7 +61,7 @@ class DrVonSchlick(CaseFileMixin, Mode):
         self.delay = DelayManager(self.machine)
         self.mode_done = False
         self.phase = "pellets"
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.pellets = 0
         self.super_jackpots = 0
         self.current_index = 0
@@ -87,7 +87,7 @@ class DrVonSchlick(CaseFileMixin, Mode):
         )
 
         player = self.machine.game.player
-        player["active_mode_points"] = 0
+        player["active_mode_points"] = self.villain_start_bonus
         player["active_mode_stat_1"] = 0
         player["active_mode_stat_2"] = 0
         player[f"{self.MODE_KEY}_state"] = 1

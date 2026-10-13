@@ -96,7 +96,7 @@ class Cerberus(CaseFileMixin, Mode):
         self.targets_hit = 0
         self.spinner_spins = 0
         self.best_jackpot = 0
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.timer_running = False
         self.timer_seconds = self.base_timer_seconds
         self.gate_open_for_upper = False

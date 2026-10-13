@@ -59,7 +59,7 @@ class ProfessorPretorius(CaseFileMixin, Mode):
         self.case_files = self.get_case_file_bonuses()
         self.mode_done = False
         self.phase = "reactor"
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.reactor_hits = 0
         self.temperature = 0
         self.cooling_spins = 0

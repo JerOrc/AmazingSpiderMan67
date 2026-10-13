@@ -62,7 +62,7 @@ class SpiderMen(CaseFileMixin, Mode):
         self.seconds_left = 0
         self.jackpots = 0
         self.fine_adjustments = 0
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.super_collected = False
 
         self.case_files = self.get_case_file_bonuses()

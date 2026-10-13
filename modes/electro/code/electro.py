@@ -92,7 +92,7 @@ class Electro(CaseFileMixin, Mode):
 
         self.electro_super_jackpot = 0
         self.electro_best_spark = 0
-        self.active_mode_points = 0
+        self.active_mode_points = self.villain_start_bonus
 
         self.shots = [
             Shot("left_web", 10, 70, "electro_left_web_hit", group="left"),

@@ -61,7 +61,7 @@ class Mysterio(CaseFileMixin, Mode):
         self.mysterio_jackpot_value = 0
         self.clues_used = 0
         self.first_attempt_pending = True
-        self.active_mode_points = 0
+        self.active_mode_points = self.villain_start_bonus
         self.mode_done = False
         self.mode_finishing = False
 
@@ -168,7 +168,7 @@ class Mysterio(CaseFileMixin, Mode):
         player["mysterio_super_value"] = self.super_value
         player["mysterio_illusions_cleared"] = 0
         player["active_mode_stat_2"] = 0
-        player["active_mode_points"] = 0
+        player["active_mode_points"] = self.villain_start_bonus
 
         self._update_mode_status()
         self.machine.events.post("mysterio_startup_complete")

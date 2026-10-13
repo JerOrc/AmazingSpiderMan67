@@ -133,7 +133,7 @@ class FifthAvenuePhantom(CaseFileMixin, Mode):
         self.reveal_seconds_left = 0
         self.current_jackpot = 0
         self.last_jackpot_awarded = 0
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.rounds_started = 0
         self.jackpots_collected = 0
         self.rounds_missed = 0
@@ -232,7 +232,7 @@ class FifthAvenuePhantom(CaseFileMixin, Mode):
     def _init_player_vars(self):
         player = self.machine.game.player
         player["fifth_avenue_phantom_state"] = 1
-        player["active_mode_points"] = 0
+        player["active_mode_points"] = self.villain_start_bonus
         player["active_mode_stat_1"] = 0
         player["active_mode_stat_2"] = 0
 

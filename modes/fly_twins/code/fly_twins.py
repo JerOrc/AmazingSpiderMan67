@@ -69,7 +69,7 @@ class FlyTwins(CaseFileMixin, Mode):
 
         self.case_files = self.get_case_file_bonuses()
         self.mode_done = False
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.round_number = self.BROTHER_1
         self.rounds_completed = 0
         self.captures = 0
@@ -151,7 +151,7 @@ class FlyTwins(CaseFileMixin, Mode):
     def _reset_player_vars(self):
         player = self.machine.game.player
         player["fly_twins_state"] = 1
-        player["active_mode_points"] = 0
+        player["active_mode_points"] = self.villain_start_bonus
         player["active_mode_stat_1"] = 0
         player["active_mode_stat_2"] = 0
         player["fly_twins_rounds_completed"] = 0

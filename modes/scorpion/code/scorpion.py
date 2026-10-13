@@ -72,7 +72,7 @@ class Scorpion(CaseFileMixin, Mode):
 
         self.scorpion_stings = 0
         self.scorpion_biggest_jackpot = 0
-        self.active_mode_points = 0
+        self.active_mode_points = self.villain_start_bonus
         self._sync_player_vars()
         self.publish_case_file_bonus_events("scorpion")
         self.publish_active_case_file_helpers([

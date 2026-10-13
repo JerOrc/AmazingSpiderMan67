@@ -58,7 +58,7 @@ class DoctorCool(Mode, CaseFileMixin):
         self.jackpot_value = self.base_jackpot
         self.jackpots_collected = 0
         self.drop_hits = 0
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.saucer_chase_active = False
         self.star_freeze_active = False
         self.available_saucer_count = 1

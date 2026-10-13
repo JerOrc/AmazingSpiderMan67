@@ -49,7 +49,7 @@ class Infinata(CaseFileMixin, Mode):
         self.delay = DelayManager(self.machine)
         self.mode_done = False
         self.phase = "areas"
-        self.mode_points = 0
+        self.mode_points = self.villain_start_bonus
         self.completed_areas = 0
         self.super_jackpots = 0
         self.super_seconds_left = 0
@@ -66,7 +66,7 @@ class Infinata(CaseFileMixin, Mode):
         self.super_seconds = self.MORE_TIME_SUPER_SECONDS if self.has_case_file("more_time") else self.SUPER_SECONDS
 
         player = self.machine.game.player
-        player["active_mode_points"] = 0
+        player["active_mode_points"] = self.villain_start_bonus
         player["active_mode_stat_2"] = 0
         player["infinata_state"] = 1
 

@@ -68,7 +68,7 @@ class RhinoBash(CaseFileMixin, Mode):
         self.rage_stage = 0
         self.rhino_best_rage_stage = 0
         self.rhino_best_jackpot_value = 0
-        self.active_mode_points = 0
+        self.active_mode_points = self.villain_start_bonus
 
         self.pops = 0
         self.jackpots = 0
